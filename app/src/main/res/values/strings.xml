@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Dynamic Grid Launcher</string>
+    <string name="textview">TextView</string>
+</resources>

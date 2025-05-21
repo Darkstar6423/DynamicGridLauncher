@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.DynamicGridLauncher" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/background_light</item>
+    </style>
+
+    <style name="Theme.DynamicGridLauncher" parent="Base.Theme.DynamicGridLauncher" />
+</resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Song_Menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="afterDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:minWidth="820sp"
+    android:minHeight="150sp">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/NestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:descendantFocusability="afterDescendants"
+        android:fillViewport="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/verticalScrollLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="afterDescendants"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:minWidth="820sp"
+                android:minHeight="150sp"
+                android:screenReaderFocusable="false">
+
+                <ImageView
+                    android:id="@+id/songImageBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:focusable="false"
+                    android:padding="0dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="2.3:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@android:color/holo_green_dark" />
+
+                <Button
+                    android:id="@+id/playButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="85dp"
+                    android:layout_height="71dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="#00FFFFFF"
+                    android:foreground="@android:drawable/ic_media_play"
+                    android:textColor="#00FFFFFF"
+                    android:textColorLink="#00FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/songImageBackground"
+                    app:layout_constraintEnd_toEndOf="@+id/songImageBackground"
+                    app:layout_constraintStart_toStartOf="@+id/songImageBackground" />
+
+                <Button
+                    android:id="@+id/prevMediaButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="82dp"
+                    android:background="#00FFFFFF"
+                    android:foreground="@android:drawable/ic_media_previous"
+                    android:textColor="#00FFFFFF"
+                    android:textColorLink="#00FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/playButton"
+                    app:layout_constraintEnd_toStartOf="@+id/playButton"
+                    app:layout_constraintTop_toTopOf="@+id/playButton" />
+
+                <Button
+                    android:id="@+id/nextMediaButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="105dp"
+                    android:layout_height="73dp"
+                    android:layout_marginStart="82dp"
+                    android:background="#00FFFFFF"
+                    android:foreground="@android:drawable/ic_media_next"
+                    android:text="play"
+                    android:textColor="#00FFFFFF"
+                    android:textColorLink="#00FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/playButton"
+                    app:layout_constraintStart_toEndOf="@+id/playButton"
+                    app:layout_constraintTop_toTopOf="@+id/playButton" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@ public class PermissionHandler {
                 musicAndAudioPerm = false;
                 Log.d("permission", "denied");
             }
+            audioPermissionCallback.accept(musicAndAudioPerm);
         });
 
         if(!musicAndAudioPerm){

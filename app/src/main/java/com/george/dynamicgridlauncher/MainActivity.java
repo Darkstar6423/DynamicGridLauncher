@@ -2,6 +2,7 @@ package com.george.dynamicgridlauncher;
 
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +15,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     List<AppObject> installedAppList = new ArrayList<>();
     public playtimeTracker playtimetracker;
 
-
+    PermissionHandler permissions;
     Context context;
 
     scrollManager scrollViewMain;
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        permissions = new PermissionHandler(this, context);
+
         //play time tracker
         playtimetracker = new playtimeTracker(this);
         playtimetracker.retrieveGamePlaytimeCache(installedAppList);
@@ -78,12 +84,20 @@ public class MainActivity extends AppCompatActivity {
         int appIndex = findAppIndexinAppList(recentGameButton.lastPlayedGame);
         recentGameButton.updateRecentGameView(appIndex, installedAppList.get(appIndex));
 
+        permissions.audioPermissionCallback = granted -> {
+            if(granted) {
+                View song = scrollViewMain.addMenu(R.layout.music_menu, R.id.playButton);
+                musicmenu = new MusicMenu((ConstraintLayout) song, getApplicationContext(), this);
+            }
+        };
 
-        View song = scrollViewMain.addMenu(R.layout.music_menu, R.id.playButton);
-        musicmenu = new MusicMenu((ConstraintLayout) song, getApplicationContext(), this);
 
+
+        permissions.runPermissionCallbacks();
 
     }
+
+
 
     @Override
     protected void onResume() {
@@ -99,8 +113,13 @@ public class MainActivity extends AppCompatActivity {
         playtimetracker.setGameTime();
 
         recentGameButton.updateMostPlayedGames();
+        installedAppList = getInstalledAppList();
 
+        if(!new HashSet<>(recentGameButton.appList).containsAll(installedAppList)) {
 
+            recentGameButton.appList = installedAppList;
+            recentGameButton.repopulateAppList();
+        }
         super.onResume();
 
 
@@ -179,8 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
             if(appPackageName.equals(packageName))
             {
-                AppObject app = new AppObject(appPackageName, appName, appImage);
-                result = app;
+                result = new AppObject(appPackageName, appName, appImage);
             }
 
         }
@@ -206,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
             getApplicationContext().startActivity(launchAppIntent);
         }
+
 
     }
 

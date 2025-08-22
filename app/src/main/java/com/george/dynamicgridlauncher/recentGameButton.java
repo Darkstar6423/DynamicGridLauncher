@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 
-import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -224,6 +223,21 @@ public class recentGameButton {
 
 
     }
+
+    public void repopulateAppList()
+    {
+        for(int i=0; i<appDrawerRows.size();i++)
+        {
+            appDrawerRows.get(i).removeAllViews();
+            mainLinearLayout.removeView(appDrawerRows.get(i));
+
+        }
+        appDrawerRows.clear();
+        populateApplications();
+
+        scrollManager.addVerticalScrollto(mainLinearLayout.getChildAt(1), nestedscrollview, appDrawerRows.get(0).getChildAt(0), 1150);
+    }
+
 
     public void populateApplications()
     {

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     List<AppObject> installedAppList = new ArrayList<>();
     public playtimeTracker playtimetracker;
 
+
     PermissionHandler permissions;
     Context context;
 
@@ -64,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         initializeScroll();
+        boolean firstLaunch = fileManager.getCachedValue("firstLaunch", context) == null;
 
 
 
-        permissions = new PermissionHandler(this, context);
+        permissions = new PermissionHandler(this, context, !firstLaunch);
 
         //play time tracker
         playtimetracker = new playtimeTracker(this);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         permissions.runPermissionCallbacks();
-
+        fileManager.setCachedValue("firstLaunch", "1", context);
     }
 
 

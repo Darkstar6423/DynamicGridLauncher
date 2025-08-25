@@ -1,6 +1,12 @@
 package com.george.dynamicgridlauncher;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -268,9 +274,34 @@ public class recentGameButton {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         ((MainActivity) context).fileManager.setCachedValue("0", appList.get(appIndex).getPackageName(), context);
                         ((MainActivity) context).ItemPress(appList.get(appIndex));
 
+                    }
+                });
+
+                button.setOnLongClickListener( new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        intent.setData(Uri.parse("package:" + appList.get(appIndex).getPackageName()));
+                        context.startActivity(intent);
+
+                        return true;
+                    }
+                });
+                //for controller button presses
+                button.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_BUTTON_SELECT) {
+                            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            intent.setData(Uri.parse("package:" + appList.get(appIndex).getPackageName()));
+                            context.startActivity(intent);
+                            return true;
+                        }
+                        return false;
                     }
                 });
 

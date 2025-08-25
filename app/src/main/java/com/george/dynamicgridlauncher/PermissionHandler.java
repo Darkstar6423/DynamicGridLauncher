@@ -7,22 +7,20 @@ import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import java.util.function.Consumer;
 
 public class PermissionHandler {
     public MainActivity mainActivity;
-    public boolean musicAndAudioPerm = false;
+    public boolean musicAndAudioPerm;
     Consumer<Boolean> audioPermissionCallback = bool -> {};
 
-    public boolean permissionAsked = false;
 
 
 
 
-    public PermissionHandler(MainActivity activity, Context c)
+    public PermissionHandler(MainActivity activity, Context c, boolean asked)
     {
         mainActivity = activity;
 
@@ -31,7 +29,8 @@ public class PermissionHandler {
 
         Log.d("Permission", "Audio:"+musicAndAudioPerm);
 
-        requestMissingPermissions();
+        if(!asked)
+            requestMissingPermissions();
     }
 
 
@@ -57,6 +56,7 @@ public class PermissionHandler {
 
     public void runPermissionCallbacks()
     {
+
         audioPermissionCallback.accept(musicAndAudioPerm);
     }
 
